@@ -1,8 +1,6 @@
 package test.queue;
 
-import main.queue.*;
-
-public class testQueue {
+public class TestQueue {
     public static void main(String[] args) {
        // implement me!
     }
