@@ -2,7 +2,7 @@ package main.stack;
 
 public class Stack {
     final private int CAPACITY;
-    private int[] stack;
+    final private int[] stack;
     private int top;
 
     public Stack(int capacity) {
@@ -16,7 +16,7 @@ public class Stack {
     }
 
     public boolean full() {
-        // implement me!
+        return top >= CAPACITY - 1;
     }
 
     public int getTop() {
@@ -27,16 +27,21 @@ public class Stack {
     }
 
     public void push(int element) {
-        // implement me!
+        if (full()) {
+            throw new RuntimeException("Stack is full!");
+        }
+        stack[++top] = element;
     }
 
     public int pop() {
-        // implement me!
+        if (top < 0) {
+            throw new RuntimeException("Stack is empty!");
+        }
+        return stack[top--];
     }
 
     public void print() {
         System.out.print("stack{");
-
         for (int i = 0; i < top; i++) {
             System.out.print(stack[i] + ", ");
         }

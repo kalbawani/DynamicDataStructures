@@ -2,12 +2,17 @@ package main.queue;
 
 public class Queue {
     final private int CAPACITY;
+    final private int[] queue;
     private int size;
-
-    // Declare queue, head and tail here!
+    private int head;
+    private int tail;
 
     public Queue(int capacity) {
-        // implement me!
+        CAPACITY = capacity;
+        size = 0;
+        head = 0;
+        tail = -1;
+        queue = new int[CAPACITY];
     }
 
     public boolean empty() {
@@ -15,7 +20,7 @@ public class Queue {
     }
 
     public boolean full() {
-        // implement me!
+        return size == CAPACITY;
     }
 
     public int size() {
@@ -23,11 +28,35 @@ public class Queue {
     }
 
     public void enqueue(int element) {
-        // implement me!
+        if (full()) {
+            throw new RuntimeException("Queue is full!");
+        }
+
+        if (tail == CAPACITY - 1) {
+            tail = 0;
+        } else {
+            ++tail;
+        }
+
+        queue[tail] = element;
+        ++size;
     }
 
     public int dequeue() {
-        // implement me!
+        if (empty()) {
+            throw new RuntimeException("Queue is empty!");
+        }
+
+        int element = queue[head];
+
+        if (head == CAPACITY - 1) {
+            head = 0;
+        } else {
+            ++head;
+        }
+
+        --size;
+        return element;
     }
 
     public void print() {
