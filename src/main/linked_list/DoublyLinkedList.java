@@ -2,37 +2,43 @@ package main.linked_list;
 
 public class DoublyLinkedList {
     private Node head;
+    private Node tail;
 
     public DoublyLinkedList() {
         this.head = null;
+        this.tail = null;
     }
 
     public Node getHead() {
         return head;
     }
 
-    public Node insert(int key, Node node) {
+    public Node insertFront(int key) {
         Node newNode = new Node(key);
-
-        if (node == null) {
-            node = head;
-        }
 
         if (head == null) {
             head = newNode;
-            return newNode;
+        } else {
+            newNode.prev = head;
+            head.next = newNode;
+            head = newNode;
         }
+
+        return head;
+    }
+
+    public Node insert(int key, Node node) {
+        Node newNode = new Node(key);
 
         if (node == head) {
-            head = newNode;
-        } else {
-            Node predecessor = node.prev;
-            newNode.prev = predecessor;
-            predecessor.next = newNode;
+            return insertFront(key);
         }
 
-        node.prev = newNode;
+        Node predecessor = node.prev;
+        newNode.prev = predecessor;
         newNode.next = node;
+        predecessor.next = newNode;
+        node.prev = newNode;
 
         return newNode;
     }
