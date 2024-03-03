@@ -13,14 +13,19 @@ public class DoublyLinkedList {
         return head;
     }
 
+    public Node getTail() {
+        return tail;
+    }
+
     public Node insertFront(int key) {
         Node newNode = new Node(key);
 
         if (head == null) {
             head = newNode;
+            tail = newNode;
         } else {
-            newNode.prev = head;
-            head.next = newNode;
+            newNode.next = head;
+            head.prev = newNode;
             head = newNode;
         }
 
@@ -28,6 +33,10 @@ public class DoublyLinkedList {
     }
 
     public Node insert(int key, Node node) {
+        if (node == null) {
+            return null;
+        }
+
         Node newNode = new Node(key);
 
         if (node == head) {
@@ -50,8 +59,11 @@ public class DoublyLinkedList {
         while (current != null) {
             System.out.print(current.key);
             current = current.next;
+            if (current != null) {
+                System.out.print(", ");
+            }
         }
 
-        System.out.println("{");
+        System.out.println("}");
     }
 }
