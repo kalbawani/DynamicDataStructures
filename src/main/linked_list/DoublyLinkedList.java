@@ -1,6 +1,6 @@
 package main.linked_list;
 
-public class DoublyLinkedList <T> {
+public class DoublyLinkedList {
     private Node head;
     private Node tail;
 
@@ -17,7 +17,7 @@ public class DoublyLinkedList <T> {
         return tail;
     }
 
-    public Node insertFront(T key) {
+    public Node insertFront(int key) {
         Node newNode = new Node(key);
 
         if (head == null) {
@@ -32,7 +32,7 @@ public class DoublyLinkedList <T> {
         return head;
     }
 
-    public Node insert(T key, Node node) {
+    public Node insert(int key, Node node) {
         if (node == null) {
             return null;
         }
@@ -52,7 +52,7 @@ public class DoublyLinkedList <T> {
         return newNode;
     }
 
-    public Node insertBack(T key) {
+    public Node insertBack(int key) {
         Node newNode = new Node(key);
 
         if (tail == null) {
@@ -87,7 +87,7 @@ public class DoublyLinkedList <T> {
         }
     }
 
-    public Node find(T key) {
+    public Node find(int key) {
         Node current = head;
 
         while (current != null && current.key != key) {
@@ -97,23 +97,24 @@ public class DoublyLinkedList <T> {
         return current;
     }
 
-    public void delete(T key) {
+    public void delete(int key) {
         Node node = find(key);
         delete(node);
     }
 
-    public void print() {
-        System.out.print("Linked List{");
+    public String toString() {
+        String str = "Linked List{";
         Node current = head;
 
         while (current != null) {
-            System.out.print(current.key);
+            str += current.key;
             current = current.next;
             if (current != null) {
-                System.out.print(", ");
+                str += ", ";
             }
         }
 
-        System.out.println("}");
+        str += "}";
+        return str;
     }
 }
