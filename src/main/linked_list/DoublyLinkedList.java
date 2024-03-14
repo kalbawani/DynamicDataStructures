@@ -37,11 +37,11 @@ public class DoublyLinkedList <T> {
             return null;
         }
 
-        Node newNode = new Node(key);
-
         if (node == head) {
             return insertFront(key);
         }
+
+        Node newNode = new Node(key);
 
         Node predecessor = node.prev;
         newNode.prev = predecessor;
@@ -73,28 +73,15 @@ public class DoublyLinkedList <T> {
         }
 
         if (node == head) {
-            head = head.next;
-            if (head != null) {
-                head.prev = null;
-            } else {
-                tail = null;
-            }
-            return;
+            head = node.next;
+        } else {
+            Node predecessor = node.prev;
+            predecessor.next = node.next;
         }
 
         if (node == tail) {
-            tail = tail.prev;
-            if (tail != null) {
-                tail.next = null;
-            } else {
-                head = null;
-            }
-            return;
-        }
-
-        if (node != head && node != tail) {
-            Node predecessor = node.prev;
-            predecessor.next = node.next;
+            tail = node.prev;
+        } else {
             Node successor = node.next;
             successor.prev = node.prev;
         }

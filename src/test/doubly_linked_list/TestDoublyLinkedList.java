@@ -8,5 +8,29 @@ public class TestDoublyLinkedList {
         dll.print();
         dll.insertFront('H');
         dll.print();
+        dll.insertFront('E');
+        dll.print();
+        dll.insertBack('K');
+        dll.print();
+        dll.insertFront('L');
+        dll.print();
+        dll.insertFront('J');
+        dll.print();
+        dll.delete('J');
+        dll.print();
+        dll.delete('K');
+        dll.print();
+        dll.delete('E');
+        dll.print();
+        dll.delete('L');
+        dll.print();
+        dll.delete('H');
+        dll.print();
+        dll.insertBack('K');
+        dll.print();
+        dll.insertFront('L');
+        dll.print();
+        dll.insertFront('J');
+        dll.print();
     }
 }
