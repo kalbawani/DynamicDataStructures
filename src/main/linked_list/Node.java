@@ -1,14 +1,14 @@
 package main.linked_list;
 
-import java.util.*;
+public class Node<K,V> {
+    public K key;
+    public V value;
+    public Node<K,V> prev;
+    public Node<K,V> next;
 
-public class Node {
-    public int key;
-    Node prev;
-    Node next;
-
-    public Node(int key) {
+    public Node(K key, V value) {
         this.key = key;
+        this.value = value;
         this.prev = null;
         this.next = null;
     }

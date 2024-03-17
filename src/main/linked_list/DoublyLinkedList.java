@@ -1,24 +1,16 @@
 package main.linked_list;
 
-public class DoublyLinkedList {
-    private Node head;
-    private Node tail;
+public class DoublyLinkedList<K,V> {
+    private Node<K,V> head;
+    private Node<K,V> tail;
 
     public DoublyLinkedList() {
         this.head = null;
         this.tail = null;
     }
 
-    public Node getHead() {
-        return head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public Node insertFront(int key) {
-        Node newNode = new Node(key);
+    public void insertFront(K key, V value) {
+        Node<K,V> newNode = new Node<>(key, value);
 
         if (head == null) {
             head = newNode;
@@ -28,46 +20,40 @@ public class DoublyLinkedList {
             head.prev = newNode;
             head = newNode;
         }
-
-        return head;
     }
 
-    public Node insert(int key, Node node) {
+    public void insert(K key, V value, Node<K,V> node) {
         if (node == null) {
-            return null;
+            return;
         }
 
         if (node == head) {
-            return insertFront(key);
+            insertFront(key, value);
         }
 
-        Node newNode = new Node(key);
+        Node<K,V> newNode = new Node<>(key, value);
 
-        Node predecessor = node.prev;
+        Node<K,V> predecessor = node.prev;
         newNode.prev = predecessor;
         newNode.next = node;
         predecessor.next = newNode;
         node.prev = newNode;
-
-        return newNode;
     }
 
-    public Node insertBack(int key) {
-        Node newNode = new Node(key);
+    public void insertBack(K key, V value) {
+        Node<K,V> newNode = new Node<>(key, value);
 
         if (tail == null) {
             head = newNode;
-            tail = newNode;
         } else {
             newNode.prev = tail;
             tail.next = newNode;
-            tail = newNode;
         }
 
-        return tail;
+        tail = newNode;
     }
 
-    public void delete(Node node) {
+    public void delete(Node<K,V> node) {
         if (node == null) {
             return;
         }
@@ -75,20 +61,20 @@ public class DoublyLinkedList {
         if (node == head) {
             head = node.next;
         } else {
-            Node predecessor = node.prev;
+            Node<K,V> predecessor = node.prev;
             predecessor.next = node.next;
         }
 
         if (node == tail) {
             tail = node.prev;
         } else {
-            Node successor = node.next;
+            Node<K,V> successor = node.next;
             successor.prev = node.prev;
         }
     }
 
-    public Node find(int key) {
-        Node current = head;
+    private Node<K,V> getNode(K key) {
+        Node<K,V> current = head;
 
         while (current != null && current.key != key) {
             current = current.next;
@@ -97,17 +83,22 @@ public class DoublyLinkedList {
         return current;
     }
 
-    public void delete(int key) {
-        Node node = find(key);
+    public V find(K key) {
+        Node<K,V> node = getNode(key);
+        return (node != null ? node.value : null);
+    }
+
+    public void delete(K key) {
+        Node<K,V> node = getNode(key);
         delete(node);
     }
 
     public String toString() {
         String str = "Linked List{";
-        Node current = head;
+        Node<K,V> current = head;
 
         while (current != null) {
-            str += current.key;
+            str += "[" + current.key.toString() + ", " + current.value.toString() + "]";
             current = current.next;
             if (current != null) {
                 str += ", ";
