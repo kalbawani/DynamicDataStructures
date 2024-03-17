@@ -15,16 +15,21 @@ public class HashTable {
     }
 
     public void insert(int key) {
-        //implement me
+        int index = hash(key);
+        DoublyLinkedList list = table[index];
+        list.insertBack(key);
     }
 
     public int find(int key) {
-        //implement me
-        //Return the index if the key exists; otherwise, return -1.
+        int index = hash(key);
+        DoublyLinkedList list = table[index];
+        return (list.find(key) == null ? -1 : index);
     }
 
     public void delete(int key) {
-        //implement me
+        int index = hash(key);
+        DoublyLinkedList list = table[index];
+        list.delete(key);
     }
 
     public void print() {
@@ -34,7 +39,7 @@ public class HashTable {
         }
     }
 
-    private int hash(int id) {
-        //implement me
+    private int hash(int key) {
+        return key % this.size;
     }
 }
