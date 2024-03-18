@@ -1,5 +1,7 @@
 package main.linked_list;
 
+import java.util.*;
+
 public class DoublyLinkedList<K,V> {
     private Node<K,V> head;
     private Node<K,V> tail;
@@ -22,6 +24,19 @@ public class DoublyLinkedList<K,V> {
         }
     }
 
+    public void insertBack(K key, V value) {
+        Node<K,V> newNode = new Node<>(key, value);
+
+        if (tail == null) {
+            head = newNode;
+        } else {
+            newNode.prev = tail;
+            tail.next = newNode;
+        }
+
+        tail = newNode;
+    }
+
     public void insert(K key, V value, Node<K,V> node) {
         if (node == null) {
             return;
@@ -38,19 +53,6 @@ public class DoublyLinkedList<K,V> {
         newNode.next = node;
         predecessor.next = newNode;
         node.prev = newNode;
-    }
-
-    public void insertBack(K key, V value) {
-        Node<K,V> newNode = new Node<>(key, value);
-
-        if (tail == null) {
-            head = newNode;
-        } else {
-            newNode.prev = tail;
-            tail.next = newNode;
-        }
-
-        tail = newNode;
     }
 
     public void delete(Node<K,V> node) {
@@ -73,10 +75,10 @@ public class DoublyLinkedList<K,V> {
         }
     }
 
-    private Node<K,V> getNode(K key) {
+    private Node<K,V> findNode(K key) {
         Node<K,V> current = head;
 
-        while (current != null && current.key != key) {
+        while (current != null && !Objects.equals(current.key, key)) {
             current = current.next;
         }
 
@@ -84,12 +86,12 @@ public class DoublyLinkedList<K,V> {
     }
 
     public V find(K key) {
-        Node<K,V> node = getNode(key);
+        Node<K,V> node = findNode(key);
         return (node != null ? node.value : null);
     }
 
     public void delete(K key) {
-        Node<K,V> node = getNode(key);
+        Node<K,V> node = findNode(key);
         delete(node);
     }
 

@@ -40,6 +40,6 @@ public class HashTable<K,V> {
     }
 
     private int hash(K key) {
-        return key.hashCode() % this.size;
+        return Math.abs(key.hashCode()) % this.size;
     }
 }
