@@ -1,7 +1,5 @@
 package main.hash_table;
 
-import main.linked_list.*;
-
 import java.util.*;
 
 public class OpenHashTable <K,V> {
@@ -17,15 +15,47 @@ public class OpenHashTable <K,V> {
     }
 
     public void insert(K key, V value) {
-        // implement me
+        int i = hash(key);
+        int count = 0;
+
+        while (count < size && table[i] != null) {
+            i = (i + 1) % size;
+            ++count;
+        }
+
+        if (count < size) {
+            table[i] = new HashEntry<>(key, value);
+        } else {
+            System.out.println("Hash table overflow");
+        }
     }
 
     public V find(K key) {
-        // implement me
+        int i = hash(key);
+        int count = 0;
+
+        while (count < size) {
+            if (table[i] != null && Objects.equals(table[i].getKey(), key)) {
+                return table[i].getValue();
+            }
+            i = (i + 1) % size;
+            ++count;
+        }
+
+        return null;
     }
 
     public void delete(K key) {
-        // implement me
+        int i = hash(key);
+        int count = 0;
+
+        while (count < size) {
+            if (table[i] != null && Objects.equals(table[i].getKey(), key)) {
+                table[i] = null;
+            }
+            i = (i + 1) % size;
+            ++count;
+        }
     }
 
     public void print() {
