@@ -1,8 +1,8 @@
-package test.hash_table;
+package test;
 
 import java.util.*;
 
-public class Student {
+public class Student implements Comparable {
     private final int id;
     private final String firstName;
     private final String lastName;
@@ -41,5 +41,13 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" + id +", " + firstName + " " + lastName + "}";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this == o) return 0;
+        if (o == null || getClass() != o.getClass()) throw new IllegalArgumentException();
+        Student other = (Student) o;
+        return (this.id - other.id);
     }
 }

@@ -1,6 +1,7 @@
 package test.hash_table;
 
 import main.hash_table.*;
+import test.*;
 
 public class TestHashTable {
     public static void main(String[] args) {
