@@ -109,39 +109,19 @@ public class BinarySearchTree<K extends Comparable,V> {
     }
 
     public Node minimum(Node<K,V> node) {
-        while (node != null && node.left != null) {
-            node = node.left;
-        }
-        return node;
+        // implement me
     }
 
     public Node maximum(Node<K,V> node) {
-        while (node != null && node.right != null) {
-            node = node.right;
-        }
-        return node;
+        // implement me
     }
 
     public K successor(K key) {
-        Node<K,V> node = find(key, root);
-        if (node != null) {
-            Node<K,V> min = minimum(node.right);
-            if (min != null) {
-                return min.key;
-            }
-        }
-        return null;
+        // implement me
     }
 
     public K predecessor(K key) {
-        Node<K,V> node = find(key, root);
-        if (node != null) {
-            Node<K,V> min = maximum(node.left);
-            if (min != null) {
-                return min.key;
-            }
-        }
-        return null;
+        // implement me
     }
 
 }
