@@ -71,13 +71,6 @@ public class BinarySearchTree<K extends Comparable,V> {
         }
     }
 
-    public Node minimum(Node<K,V> node) {
-        while (node != null && node.left != null) {
-            node = node.left;
-        }
-        return node;
-    }
-
     public void delete(K key) {
         Node node = find(key, root);
         delete(node);
@@ -114,4 +107,41 @@ public class BinarySearchTree<K extends Comparable,V> {
             v.parent = u.parent;
         }
     }
+
+    public Node minimum(Node<K,V> node) {
+        while (node != null && node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    public Node maximum(Node<K,V> node) {
+        while (node != null && node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    public K successor(K key) {
+        Node<K,V> node = find(key, root);
+        if (node != null) {
+            Node<K,V> min = minimum(node.right);
+            if (min != null) {
+                return min.key;
+            }
+        }
+        return null;
+    }
+
+    public K predecessor(K key) {
+        Node<K,V> node = find(key, root);
+        if (node != null) {
+            Node<K,V> min = maximum(node.left);
+            if (min != null) {
+                return min.key;
+            }
+        }
+        return null;
+    }
+
 }
